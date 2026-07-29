@@ -1,9 +1,22 @@
 def is_palindrome(s):
-    cleaned = ''.join(ch.lower() for ch in s if ch.isalnum())
-    return cleaned == cleaned[::-1]
+    left, right = 0, len(s) - 1
+
+    while left < right:
+        while left < right and not s[left].isalnum():
+            left += 1
+        while left < right and not s[right].isalnum():
+            right -= 1
+
+        if left < right and s[left].lower() != s[right].lower():
+            return False
+
+        left += 1
+        right -= 1
+
+    return True
 
 
 # Example usage
-print(is_palindrome("madam"))      # True
-print(is_palindrome("hello"))      # False
+print(is_palindrome("madam"))  # True
+print(is_palindrome("hello"))  # False
 print(is_palindrome("A man, a plan, a canal: Panama"))  # True
